@@ -1,20 +1,28 @@
 #include <iostream>
-#include "windows_libs/plaja_logger/PlajaLogger.h"
+#include "PlajaLogger.h"
 #include "Model/User/User.h"
 
 int main()
 {
-    std::string name = "Martin";
+    PlajaLogger::Info("Informacni")
+    .AppendValue("id", 25)
+    .AppendValue("name", "Martin")
+    .Write();
 
-    User* user = new User(name, "Krepcik", 22);
+    PlajaLogger::Debug("Debugovaci", '"')
+    .AppendValue("id", 25)
+    .AppendValue("name", "Martin")
+    .Write();
 
-    PlajaLogger::Debug("User created")
-        .AppendValue("name", user->getName())
-        .AppendValue("surname", user->getSurname())
-        .AppendValue("age", user->getAge())
-        .Write();
+    PlajaLogger::Warning("Warningovaci", '\'')
+    .AppendValue("id", 25)
+    .AppendValue("name", "Martin")
+    .Write();
 
-    PlajaLogger::Info("Program finished").Write();
+    PlajaLogger::Error("Errorovaci", '\\')
+    .AppendValue("id", 25)
+    .AppendValue("name", "Martin", '"')
+    .Write();
 
     return 0;
 }
